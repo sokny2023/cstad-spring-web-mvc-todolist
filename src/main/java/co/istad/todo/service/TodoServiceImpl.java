@@ -5,6 +5,8 @@ import co.istad.todo.repository.TodoListDataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -23,7 +25,11 @@ public class TodoServiceImpl implements TodoService{
 
     @Override
     public void addTodoList(Todo todo) {
-
+        todo.setCreateAt(LocalDate.from(LocalDateTime.now()));
+        todo.setId(10);
+        if(todoListDataSource != null){
+            todoListDataSource.addTodoList(todo);
+        }
     }
 
     @Override

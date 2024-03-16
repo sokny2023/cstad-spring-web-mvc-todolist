@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -22,4 +24,17 @@ public class TodoController {
         model.addAttribute("todos", todoList);
         return "index";
     }
+
+    @GetMapping("/todo/create")
+    public String createNew(Model model){
+        Todo todos = new Todo();
+        model.addAttribute("todos",todos);
+        return "create";
+    }
+    @PostMapping("/create")
+    public String submitCreate(@ModelAttribute("todos") Todo todo){
+        todoService.addTodoList(todo);
+        return "redirect:/todo";
+    }
+
 }
