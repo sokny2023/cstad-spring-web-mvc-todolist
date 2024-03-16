@@ -11,4 +11,6 @@ public interface TodoService {
     void deleteById(Integer id);
     void updateTodo(Todo todo);
     List<Todo> searchTodoLists(String task, Boolean isDone);
+    public void toggleTodoStatus(Long id);
+
 }

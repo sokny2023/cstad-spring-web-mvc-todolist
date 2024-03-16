@@ -20,17 +20,24 @@ public class TodoServiceImpl implements TodoService{
 
     @Override
     public Todo searchById(Integer id) {
-        return null;
+        return todoListDataSource.searchById(id);
     }
 
     @Override
     public void addTodoList(Todo todo) {
-        todo.setCreateAt(LocalDate.from(LocalDateTime.now()));
-        todo.setId(10);
-        if(todoListDataSource != null){
+        if (todoListDataSource != null) {
+            List<Todo> todoList = todoListDataSource.getTodoList();
+            if (!todoList.isEmpty()) {
+                Todo lastTodo = todoList.get(todoList.size() - 1);
+                todo.setId(lastTodo.getId() + 1);
+            }
+            else
+                todo.setId(1);
+            todo.setCreateAt(LocalDate.now());
             todoListDataSource.addTodoList(todo);
         }
     }
+
 
     @Override
     public void deleteById(Integer id) {
@@ -45,5 +52,14 @@ public class TodoServiceImpl implements TodoService{
     @Override
     public List<Todo> searchTodoLists(String task, Boolean isDone) {
         return null;
+    }
+
+    @Override
+    public void toggleTodoStatus(Long id) {
+        Todo todo = searchById(id.intValue());
+        if (todo != null) {
+            todo.setIsDone(!todo.getIsDone());
+            updateTodo(todo);
+        }
     }
 }

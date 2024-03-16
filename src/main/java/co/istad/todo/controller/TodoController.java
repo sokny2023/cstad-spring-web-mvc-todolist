@@ -5,10 +5,7 @@ import co.istad.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,6 +31,12 @@ public class TodoController {
     @PostMapping("/create")
     public String submitCreate(@ModelAttribute("todos") Todo todo){
         todoService.addTodoList(todo);
+        return "redirect:/todo";
+    }
+
+    @PostMapping("/todo/{id}/toggle-status")
+    public String toggleTodoStatus(@PathVariable Long id) {
+        todoService.toggleTodoStatus(id);
         return "redirect:/todo";
     }
 

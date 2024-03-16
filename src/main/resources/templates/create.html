@@ -31,12 +31,21 @@
 </main>
 
 <script>
-  const form = document.querySelector('form');
-  const isDoneCheckbox = document.getElementById('isDoneCheckbox');
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    const isDoneCheckbox = document.getElementById('isDoneCheckbox');
 
-  form.addEventListener('submit', function(event) {
-    // Ensures the checkbox value is properly submitted
-    isDoneCheckbox.value = isDoneCheckbox.checked ? 'true' : 'false';
+    form.addEventListener('submit', function(event) {
+      // Create a hidden input to store the boolean value of the checkbox
+      const hiddenIsDoneInput = document.createElement('input');
+      hiddenIsDoneInput.type = 'hidden';
+      hiddenIsDoneInput.name = 'isDone';
+      // Set the value based on the checkbox's checked state
+      hiddenIsDoneInput.value = isDoneCheckbox.checked ? 'true' : 'false';
+
+      // Append the hidden input to the form
+      form.appendChild(hiddenIsDoneInput);
+    });
   });
 </script>
 </body>

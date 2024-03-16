@@ -116,7 +116,14 @@
                     <td class="px-4 py-3" th:text="${todo.id}"></td>
                     <td class="px-4 py-3" th:text="${todo.task}"></td>
                     <td class="px-4 py-3" th:text="${todo.description}"></td>
-                    <td class="px-4 py-3" th:text="${todo.isDone}"></td>
+                    <td class="px-4 py-3">
+                        <!-- Use Thymeleaf to conditionally check the checkbox based on the todo's isDone status -->
+                        <!-- The checkbox is also disabled to prevent changes in this view -->
+                        <form th:action="@{/todo/{id}/toggle-status(id=${todo.id})}" method="post">
+                            <input type="checkbox" th:checked="${todo.isDone}" onchange="this.form.submit()" class="checked:bg-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
+                            <!-- Include a CSRF token if your framework requires it for form submissions -->
+                        </form>
+                    </td>
                     <td class="px-4 py-3" th:text="${todo.createAt}"></td>
                     <td class="px-4 py-3">Update</td>
                     <td class="px-4 py-3">Delete</td>
