@@ -5,6 +5,7 @@
     <title>MVC</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header class="w-[90%]">
@@ -89,7 +90,11 @@
     </header>
 
     <main class="w-[90%] mt-14 container mx-auto px-4">
-        <section class="mt-2 border border-gray-200 rounded-lg shadow">
+        <section class="flex justify-center items-center">
+            <button type="button" class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Add Todo List</button>
+        </section>
+
+        <section class="mt-6 border border-pink-200 rounded-lg shadow ">
             <table class="min-w-full leading-normal">
                 <thead>
                 <tr class="text-left text-gray-700 bg-gray-50">
@@ -98,6 +103,8 @@
                     <th class="px-4 py-3 border-b-2 border-gray-200">Description</th>
                     <th class="px-4 py-3 border-b-2 border-gray-200">Is Done</th>
                     <th class="px-4 py-3 border-b-2 border-gray-200">Date</th>
+                    <th class="px-4 py-3 border-b-2 border-gray-200">Edit</th>
+                    <th class="px-4 py-3 border-b-2 border-gray-200">Delete</th>
                 </tr>
                 </thead>
 
@@ -106,8 +113,10 @@
                     <td class="px-4 py-3" th:text="${todo.id}"></td>
                     <td class="px-4 py-3" th:text="${todo.task}"></td>
                     <td class="px-4 py-3" th:text="${todo.description}"></td>
-                    <td class="px-4 py-3" th:text="${todo.isDone}">No</td>
-                    <td class="px-4 py-3" th:text="${todo.createAt}">2024-03-16</td>
+                    <td class="px-4 py-3" th:text="${todo.isDone}"></td>
+                    <td class="px-4 py-3" th:text="${todo.createAt}"></td>
+                    <td class="px-4 py-3">Update</td>
+                    <td class="px-4 py-3">Delete</td>
                 </tr>
                 </tbody>
             </table>
