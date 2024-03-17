@@ -62,4 +62,8 @@ public class TodoServiceImpl implements TodoService{
             updateTodo(todo);
         }
     }
+
+    public List<Todo> searchTodolist(String task){
+        return todoListDataSource.searchDodoList(task);
+    }
 }

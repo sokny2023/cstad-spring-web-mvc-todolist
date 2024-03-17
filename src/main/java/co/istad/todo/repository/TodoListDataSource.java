@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @Getter
@@ -48,8 +49,11 @@ public class TodoListDataSource implements TodoListRepository{
 
     }
 
-    @Override
-    public List<Todo> searchTodoLists(String task, Boolean isDone) {
-        return null;
+    public List<Todo> searchDodoList(String task) {
+        return todoList.stream()
+                .filter(todo -> todo.getTask().toLowerCase().contains(task.toLowerCase())
+                        || todo.getDescription().toLowerCase().contains(task.toLowerCase()))
+                .collect(Collectors.toList());
     }
+
 }

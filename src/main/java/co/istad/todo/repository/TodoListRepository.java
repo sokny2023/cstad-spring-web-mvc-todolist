@@ -11,5 +11,4 @@ public interface TodoListRepository {
     void addTodoList(Todo todo);
     void deleteById(Integer id);
     void updateTodo(Todo todo);
-    List<Todo> searchTodoLists(String task, Boolean isDone);
 }

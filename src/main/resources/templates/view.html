@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+</head>
+<body>
+<h1 class="mt-14 font-medium text-xl text-sky-600 text-center">Search Results</h1>
+<div >
+
+    <main class="w-[90%] mx-auto">
+        <section class="mt-10 border border-gray-200 rounded-lg shadow ">
+            <table class="min-w-full leading-normal">
+                <thead>
+                <tr class="text-left text-gray-700 bg-gray-50">
+                    <th class="px-4 py-3 border-b-2 border-gray-200">Id</th>
+                    <th class="px-4 py-3 border-b-2 border-gray-200">Task</th>
+                    <th class="px-4 py-3 border-b-2 border-gray-200">Description</th>
+                    <th class="px-4 py-3 border-b-2 border-gray-200">Is Done</th>
+                    <th class="px-4 py-3 border-b-2 border-gray-200">Date</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="todo: ${todos}" class="border-b border-gray-200">
+                    <td class="px-4 py-3" th:text="${todo.id}"></td>
+                    <td class="px-4 py-3" th:text="${todo.task}"></td>
+                    <td class="px-4 py-3" th:text="${todo.description}"></td>
+                    <td class="px-4 py-3">
+                        <form th:action="@{/todo/{id}/toggle-status(id=${todo.id})}" method="post">
+                            <input type="checkbox" th:checked="${todo.isDone}" onchange="this.form.submit()" class="checked:bg-blue-500 ml-2 h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        </form>
+                    </td>
+                    <td class="px-4 py-3" th:text="${todo.createAt}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <div class="flex justify-center mt-10">
+            <a href="index.html" class="py-2 px-4 rounded-[5px] border border-blue-200 hover:border-blue-400" th:href="@{/todo}">Back to list</a>
+        </div>
+    </main>
+
+</div>
+
+</body>
+</html>
