@@ -41,12 +41,18 @@ public class TodoListDataSource implements TodoListRepository{
 
     @Override
     public void deleteById(Integer id) {
-
+        todoList.removeIf(todo -> todo.getId().equals(id));
     }
+
 
     @Override
     public void updateTodo(Todo todo) {
-
+        todoList.stream().filter(t->t.getId().equals(todo.getId()))
+                .forEach(p-> {
+                    p.setTask(todo.getTask());
+                    p.setDescription(todo.getDescription());
+                    p.setIsDone(todo.getIsDone());
+                });
     }
 
     public List<Todo> searchDodoList(String task) {

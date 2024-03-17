@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -41,12 +40,12 @@ public class TodoServiceImpl implements TodoService{
 
     @Override
     public void deleteById(Integer id) {
-
+        todoListDataSource.deleteById(id);
     }
 
     @Override
     public void updateTodo(Todo todo) {
-
+        todoListDataSource.updateTodo(todo);
     }
 
     @Override

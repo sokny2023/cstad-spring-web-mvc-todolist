@@ -11,9 +11,9 @@
     <header class="w-[90%]">
         <nav class="bg-white border-gray-200 dark:bg-gray-900">
             <div class="w-[88%] flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                <a href="index.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+<!--                    <img src="" class="h-8" alt="Flowbite Logo" />-->
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Todo List</span>
                 </a>
                 <div class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
                     <button type="button" data-dropdown-toggle="language-dropdown-menu" class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -154,20 +154,24 @@
                     <td class="px-4 py-3" th:text="${todo.task}"></td>
                     <td class="px-4 py-3" th:text="${todo.description}"></td>
                     <td class="px-4 py-3">
-                        <!-- Use Thymeleaf to conditionally check the checkbox based on the todo's isDone status -->
-                        <!-- The checkbox is also disabled to prevent changes in this view -->
                         <form th:action="@{/todo/{id}/toggle-status(id=${todo.id})}" method="post">
                             <input type="checkbox" th:checked="${todo.isDone}" onchange="this.form.submit()" class="checked:bg-blue-500 ml-2 h-4 w-4 text-blue-600 border-gray-300 rounded">
-                            <!-- Include a CSRF token if your framework requires it for form submissions -->
                         </form>
                     </td>
                     <td class="px-4 py-3" th:text="${todo.createAt}"></td>
                     <td class="px-4 py-3">
-                        <i class="ml-2 text-yellow-600 text-xl fa-solid fa-pen-to-square"></i>
+                        <a th:href="@{/todo/edit/{id}(id=${todo.id})}">
+                            <i class="ml-2 text-yellow-600 text-xl fa-solid fa-pen-to-square"></i>
+                        </a>
                     </td>
                     <td class="px-4 py-3">
-                        <i class="ml-4 text-pink-600 text-xl fa-solid fa-trash"></i>
+                        <form th:action="@{/todo/delete/{id}(id=${todo.id})}" method="post">
+                            <button type="submit">
+                                <i class="ml-4 text-pink-600 text-xl fa-solid fa-trash"></i>
+                            </button>
+                        </form>
                     </td>
+
                 </tr>
                 </tbody>
             </table>

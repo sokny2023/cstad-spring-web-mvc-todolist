@@ -40,24 +40,26 @@ public class TodoController {
         return "redirect:/todo";
     }
 
-//    @GetMapping("/todo/{id}")
-//    public String viewTodoById(@PathVariable Integer id, Model model) {
-//        Todo todo = todoService.searchById(id);
-//        if (todo == null) {
-//            return "error/404"; // Assuming you have a 404 error page set up
-//        }
-//        model.addAttribute("todos", todo);
-//        return "view"; // Assuming you have a Thymeleaf template named 'view.html'
-//    }
-
     @GetMapping("/todo/search")
     public String searchTodoByTask(@RequestParam("task") String task, Model model) {
         List<Todo> searchResults = todoService.searchTodolist(task);
         if (searchResults.isEmpty()) {
-            return "error/404"; // Consider a more user-friendly approach for no results
+            return "error/404";
         }
         model.addAttribute("todos", searchResults);
-        return "view"; // No need to redirect, directly return the view page
+        return "view";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteTodo(@PathVariable Integer id) {
+        todoService.deleteById(id);
+        return "redirect:/todo"; // Assuming you have a mapping to show the todo list
+    }
+
+    @PostMapping("/update")
+    public String updateTodo(Todo todo) {
+        todoService.updateTodo(todo);
+        return "redirect:/todo";
     }
 
 
