@@ -12,6 +12,5 @@ public interface TodoService {
     void updateTodo(Todo todo);
     List<Todo> searchTodoLists(String task, Boolean isDone);
     public void toggleTodoStatus(Long id);
-
     List<Todo> searchTodolist(String task);
 }

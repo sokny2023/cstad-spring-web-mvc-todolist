@@ -50,20 +50,16 @@ public class TodoController {
         return "view";
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("todo/delete/{id}")
     public String deleteTodo(@PathVariable Integer id) {
         todoService.deleteById(id);
         return "redirect:/todo"; // Assuming you have a mapping to show the todo list
     }
 
-    @PostMapping("/update")
+    @PostMapping("todo/update")
     public String updateTodo(Todo todo) {
         todoService.updateTodo(todo);
         return "redirect:/todo";
     }
-
-
-
-
 
 }
